@@ -4,15 +4,15 @@ import { ChannelDetails } from "../../../contexts/ChannelsContext";
 import { LoginHeaders } from "../../../contexts/LoginContext";
 import { UsersContext } from "../../../contexts/UsersContext";
 
-const AddChannelMember = ({retrieveChannelDetails}) => {
-    const {loginHeaders} = useContext(LoginHeaders);
-    const {channelDetails} = useContext(ChannelDetails);
-    const {users} = useContext(UsersContext);
+const AddChannelMember = ({ retrieveChannelDetails }) => {
+    const { loginHeaders } = useContext(LoginHeaders);
+    const { channelDetails } = useContext(ChannelDetails);
+    const { users } = useContext(UsersContext);
     const [newMemberEmail, setNewMemberEmail] = useState("");
     const [resMessage, setResMessage] = useState("");
     const [success, setSuccess] = useState("");
     const navigate = useNavigate();
-    const url = "http://206.189.91.54/api/v1/";
+    const url = "//206.189.91.54/api/v1/";
 
     const addMember = async (newMember) => {
         const response = await fetch(`${url}channel/add_member`, {
@@ -27,10 +27,10 @@ const AddChannelMember = ({retrieveChannelDetails}) => {
             })
         });
 
-        if(response.status === 200) {
+        if (response.status === 200) {
             const data = await response.json();
 
-            if(data.hasOwnProperty('errors')) {
+            if (data.hasOwnProperty('errors')) {
                 setSuccess(false);
                 setResMessage(`${newMemberEmail} is already a member of this channel!`);
                 return;
@@ -46,13 +46,13 @@ const AddChannelMember = ({retrieveChannelDetails}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(newMemberEmail.trim().length === 0) {
+        if (newMemberEmail.trim().length === 0) {
             return;
         }
 
         const idx = users.findIndex(user => user.email === newMemberEmail.trim());
 
-        if(idx !== -1) {
+        if (idx !== -1) {
             addMember(users[idx]);
         } else {
             setSuccess(false);
@@ -65,7 +65,7 @@ const AddChannelMember = ({retrieveChannelDetails}) => {
         console.log(resMessage);
     }, []);
 
-    return(
+    return (
         <div className="channel-details-body add-member-div">
             <i className="fa-solid fa-arrow-left-long" onClick={e => navigate("../members")}></i>
 

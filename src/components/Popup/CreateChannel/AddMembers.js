@@ -1,9 +1,9 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { UsersContext } from "../../../contexts/UsersContext";
 import "./AddMembers.css"
 
-const AddMembers = ({tags, setTags, indexTags, setIndexTags}) => {
-    const {users} = useContext(UsersContext);
+const AddMembers = ({ tags, setTags, indexTags, setIndexTags }) => {
+    const { users } = useContext(UsersContext);
 
     const handleKeyDown = (e) => {
         if (e.key !== "Enter") return;
@@ -33,12 +33,12 @@ const AddMembers = ({tags, setTags, indexTags, setIndexTags}) => {
     return (
         <div className="tags-input-container">
 
-            { tags.map((tag, index) => (
+            {tags.map((tag, index) => (
                 <div className="tag-item" key={index}>
                     <span className="text">{tag}</span>
                     <span className="close" onClick={() => removeTag(index)}>&times;</span>
                 </div>
-            )) }
+            ))}
             <input onKeyDown={handleKeyDown} type="text" placeholder="...akobudoy@uwu.com" className="tags-input-box" />
         </div>
     )

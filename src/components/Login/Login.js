@@ -4,11 +4,11 @@ import { LoginHeaders, LoginInfo } from "../../contexts/LoginContext";
 import "./Login-Reg.css"
 
 const Login = () => {
-    const [userInput, setUserInput] = useState({email: '', password: ''});
+    const [userInput, setUserInput] = useState({ email: '', password: '' });
     const [invalid, setInvalid] = useState(false);
-    const url = "http://206.189.91.54/api/v1";
-    const {updateLoginInfo} = useContext(LoginInfo);
-    const {updateLoginHeaders} = useContext(LoginHeaders);
+    const url = "//206.189.91.54/api/v1";
+    const { updateLoginInfo } = useContext(LoginInfo);
+    const { updateLoginHeaders } = useContext(LoginHeaders);
     const navigate = useNavigate();
 
     const signIn = async () => {
@@ -22,7 +22,7 @@ const Login = () => {
             body: JSON.stringify(userInput)
         });
 
-        if(response.status === 200) {
+        if (response.status === 200) {
             setInvalid(false);
 
             updateLoginHeaders({
@@ -59,7 +59,7 @@ const Login = () => {
                             type="text"
                             placeholder="Enter your email"
                             value={userInput.email}
-                            onInput={e => setUserInput({...userInput, email: e.target.value})}
+                            onInput={e => setUserInput({ ...userInput, email: e.target.value })}
                         />
                     </div>
 
@@ -69,7 +69,7 @@ const Login = () => {
                             type="password"
                             placeholder="••••••"
                             value={userInput.password}
-                            onInput={e => setUserInput({...userInput, password: e.target.value})}
+                            onInput={e => setUserInput({ ...userInput, password: e.target.value })}
                         />
                     </div>
 
