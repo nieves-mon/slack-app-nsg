@@ -15,9 +15,9 @@ const Login = () => {
         updateLoginInfo(userInput);
 
         const response = await fetch(`${url}/auth/sign_in`, {
+            mode: 'cors',
             method: 'POST',
             headers: {
-                'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(userInput)
