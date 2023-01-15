@@ -17,7 +17,8 @@ const Login = () => {
         const response = await fetch(`${url}/auth/sign_in`, {
             method: 'POST',
             headers: {
-                'accept': 'application/json'
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(userInput)
         });
