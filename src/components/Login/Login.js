@@ -15,7 +15,7 @@ const Login = () => {
         updateLoginInfo(userInput);
 
         const response = await fetch(`${url}/auth/sign_in`, {
-            mode: 'cors',
+            mode: 'no-cors',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
