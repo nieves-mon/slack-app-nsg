@@ -17,7 +17,7 @@ const Login = () => {
         const response = await fetch(`${url}/auth/sign_in`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'accept': 'application/json'
             },
             body: JSON.stringify(userInput)
         });
