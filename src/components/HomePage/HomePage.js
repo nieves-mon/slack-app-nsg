@@ -31,7 +31,7 @@ const HomePage = () => {
     }
 
     const retrieveUsers = async () => {
-        const response = await fetch(`${url}/users`, {
+        const response = await fetch(`${url}/users/recent`, {
             method: 'GET',
             headers: { ...loginHeaders }
         });
@@ -39,40 +39,47 @@ const HomePage = () => {
         if (response.status === 200) {
             const data = await response.json();
             const users = data['data'];
-            updateUsers(users);
 
-            const demoUsers = [
-                'nieves1@nieves.com',
-                'nieves2@nieves.com',
-                'shawn@gmail.com',
-                'shawn1@shawn.com',
-                'shawn2@shawn.com',
-                'gene@jimil.com',
-                'gene3@gene.com',
-                'gene4@gene.com'
-            ];
-            const tempUserDMs = [...userDMs];
+            const idx = users.findIndex(user => user.uid === loginHeaders.uid);
 
-            for (let i = 0; i < demoUsers.length; i++) {
-                const idx = users.findIndex(user => user.email === demoUsers[i]);
-
-                const response = await fetch(`${url}/messages?receiver_id=${users[idx].id}&receiver_class=User`, {
-                    method: 'GET',
-                    headers: { ...loginHeaders }
-                });
-
-                if (response.status === 200) {
-                    const data = await response.json();
-                    const messages = data['data'];
-                    console.log(messages);
-
-                    if (messages.length > 0 && tempUserDMs.findIndex(user => user.email === demoUsers[i]) === -1) {
-                        tempUserDMs.push(users[idx]);
-                    }
-                }
+            if (idx !== null) {
+                users.splice(idx, 1);
             }
 
-            updateUserDMs([...tempUserDMs]);
+            updateUsers(users);
+
+            // const demoUsers = [
+            //     'nieves1@nieves.com',
+            //     'nieves2@nieves.com',
+            //     'shawn@gmail.com',
+            //     'shawn1@shawn.com',
+            //     'shawn2@shawn.com',
+            //     'gene@jimil.com',
+            //     'gene3@gene.com',
+            //     'gene4@gene.com'
+            // ];
+            // const tempUserDMs = [...userDMs];
+
+            // for (let i = 0; i < demoUsers.length; i++) {
+            //     const idx = users.findIndex(user => user.email === demoUsers[i]);
+
+            //     const response = await fetch(`${url}/messages?receiver_id=${users[idx].id}&receiver_class=User`, {
+            //         method: 'GET',
+            //         headers: { ...loginHeaders }
+            //     });
+
+            //     if (response.status === 200) {
+            //         const data = await response.json();
+            //         const messages = data['data'];
+            //         console.log(messages);
+
+            //         if (messages.length > 0 && tempUserDMs.findIndex(user => user.email === demoUsers[i]) === -1) {
+            //             tempUserDMs.push(users[idx]);
+            //         }
+            //     }
+            // }
+
+            updateUserDMs(users);
         }
     }
 
