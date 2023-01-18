@@ -8,15 +8,15 @@ const UserReg = () => {
 
     const registration = (regData) => {
         console.log("regData", regData);
-        fetch("http://206.189.91.54/api/v1/auth", {
+        fetch("//206.189.91.54/api/v1/auth", {
             method: "POST",
             body: JSON.stringify(regData),
             headers: {
                 'Content-type': 'application/json'
             }
         })
-        .then(res => res.json())
-        .then(data => console.log(data))
+            .then(res => res.json())
+            .then(data => console.log(data))
     };
 
     const newReg = {
@@ -49,4 +49,3 @@ const UserReg = () => {
 }
 
 export default UserReg
-

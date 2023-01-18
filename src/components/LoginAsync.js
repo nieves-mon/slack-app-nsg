@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const LoginAsync = () => {
-    const url = "http://206.189.91.54/api/v1";
+    const url = "//206.189.91.54/api/v1";
     const [userInfo, setUserInfo] = useState({
         email: '',
         password: '',
@@ -21,7 +21,7 @@ const LoginAsync = () => {
 
         for (let [key, value] of response.headers) {
             console.log(`${key} = ${value}`);
-          }
+        }
     }
 
     const submitHandler = (e) => {
@@ -33,9 +33,9 @@ const LoginAsync = () => {
         <div>
             <form>
                 <label>Email: </label>
-                <input type="text" value={userInfo.email} onInput={e => setUserInfo({...userInfo, email: e.target.value})}></input>
+                <input type="text" value={userInfo.email} onInput={e => setUserInfo({ ...userInfo, email: e.target.value })}></input>
                 <label>Pass: </label>
-                <input type="text" value={userInfo.password} onInput={e => setUserInfo({...userInfo, password: e.target.value})}></input>
+                <input type="text" value={userInfo.password} onInput={e => setUserInfo({ ...userInfo, password: e.target.value })}></input>
                 <button onClick={submitHandler}>Submit</button>
             </form>
         </div>

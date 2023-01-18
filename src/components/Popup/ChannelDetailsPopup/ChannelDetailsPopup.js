@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, Route, Routes } from "react-router-dom";
 import { ChannelDetails } from "../../../contexts/ChannelsContext";
 import AddChannelMember from "./AddChannelMember";
@@ -7,12 +7,12 @@ import "../Popup.css"
 import "./ChannelDetails.css"
 import AboutChannel from "./AboutChannel";
 
-const ChannelDetailsPopup = ({handleToggle, retrieveChannelDetails}) => {
-    const {channelDetails} = useContext(ChannelDetails);
+const ChannelDetailsPopup = ({ handleToggle, retrieveChannelDetails }) => {
+    const { channelDetails } = useContext(ChannelDetails);
     const [toggled, setToggled] = useState("members");
     const navigate = useNavigate();
 
-    return(
+    return (
         <div className="popup-overlay-div">
             <div className="popup channel-details-popup">
                 <div className="popup-header">
@@ -39,9 +39,9 @@ const ChannelDetailsPopup = ({handleToggle, retrieveChannelDetails}) => {
 
                 <div className="popup-body">
                     <Routes>
-                        <Route path="/members" element={<ChannelMembers />}/>
-                        <Route path="/members/add-new-member" element={<AddChannelMember retrieveChannelDetails={retrieveChannelDetails}/>}/>
-                        <Route path="/about" element={<AboutChannel />}/>
+                        <Route path="/members" element={<ChannelMembers />} />
+                        <Route path="/members/add-new-member" element={<AddChannelMember retrieveChannelDetails={retrieveChannelDetails} />} />
+                        <Route path="/about" element={<AboutChannel />} />
                     </Routes>
                 </div>
             </div>

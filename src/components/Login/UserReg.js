@@ -3,21 +3,21 @@ import { useNavigate } from "react-router-dom";
 import "./Login-Reg.css";
 
 const UserReg = () => {
-    const [userInput, setUserInput] = useState({email: '', password: '', password_confirmation: ''});
+    const [userInput, setUserInput] = useState({ email: '', password: '', password_confirmation: '' });
     const navigate = useNavigate();
 
     const registration = async (userInput) => {
 
-        const response = await fetch("http://206.189.91.54/api/v1/auth", {
+        const response = await fetch("//206.189.91.54/api/v1/auth", {
             method: "POST",
             headers: {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify(userInput)
         });
-        
-        if(response.status === 200) {
-        navigate("/");
+
+        if (response.status === 200) {
+            navigate("/");
         } else {
             return;
         }
@@ -41,7 +41,7 @@ const UserReg = () => {
                             type="text"
                             placeholder="Enter your email"
                             value={userInput.email}
-                            onInput={e => setUserInput({...userInput, email: e.target.value})}
+                            onInput={e => setUserInput({ ...userInput, email: e.target.value })}
                         />
                     </div>
 
@@ -51,7 +51,7 @@ const UserReg = () => {
                             type="password"
                             placeholder="••••••"
                             value={userInput.password}
-                            onInput={e => setUserInput({...userInput, password: e.target.value})}
+                            onInput={e => setUserInput({ ...userInput, password: e.target.value })}
                         />
                     </div>
 
@@ -61,16 +61,16 @@ const UserReg = () => {
                             type="password"
                             placeholder="••••••"
                             value={userInput.password_confirmation}
-                            onInput={e => setUserInput({...userInput, password_confirmation: e.target.value})}
+                            onInput={e => setUserInput({ ...userInput, password_confirmation: e.target.value })}
                         />
                     </div>
 
                     <div className="form-inner-con">
-                        <button 
-                            type="Submit" 
+                        <button
+                            type="Submit"
                             className="form-btn"
                             onClick={submitHandler}
-                            >Sign up
+                        >Sign up
                         </button>
                     </div>
                 </form>

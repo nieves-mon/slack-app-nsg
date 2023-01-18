@@ -6,15 +6,15 @@ const Trial = () => {
 
     const login = (userData) => {
         console.log("userData", userData);
-        fetch("http://206.189.91.54/api/v1/auth/sign_in", {
+        fetch("//206.189.91.54/api/v1/auth/sign_in", {
             method: "POST",
             body: JSON.stringify(userData),
             headers: {
                 'Content-type': 'application/json'
             }
         })
-        .then(res => res.json())
-        .then(data => console.log(data))
+            .then(res => res.json())
+            .then(data => console.log(data))
         // .then(data => alert(`Welcome ${data.name}`))
     };
 

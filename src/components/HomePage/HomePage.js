@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { ChannelsContext } from "../../contexts/ChannelsContext";
-import { SelectedContext} from "../../contexts/SelectedContext";
+import { SelectedContext } from "../../contexts/SelectedContext";
 import { LoginHeaders } from "../../contexts/LoginContext";
 import MainChat from "../MainChat/MainChat";
 import NavBar from "../NavBar/NavBar";
@@ -11,17 +11,17 @@ import { UserDMsContext } from "../../contexts/UserDMsContext";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
-    const {updateUsers} = useContext(UsersContext);
-    const {channels, updateChannels} = useContext(ChannelsContext);
-    const {selected, updateSelected} = useContext(SelectedContext);
-    const {userDMs, updateUserDMs} = useContext(UserDMsContext);
-    const {loginHeaders} = useContext(LoginHeaders);
+    const { updateUsers } = useContext(UsersContext);
+    const { channels, updateChannels } = useContext(ChannelsContext);
+    const { selected, updateSelected } = useContext(SelectedContext);
+    const { userDMs, updateUserDMs } = useContext(UserDMsContext);
+    const { loginHeaders } = useContext(LoginHeaders);
     const [isAddDMToggled, setIsAddDMToggled] = useState(false);
     const navigate = useNavigate();
-    const url = "http://206.189.91.54/api/v1";
+    const url = "//206.189.91.54/api/v1";
 
     const handleDMToggle = () => {
-        if(isAddDMToggled) {
+        if (isAddDMToggled) {
             navigate("/homepage");
         } else {
             navigate("./add-dm");
@@ -31,12 +31,12 @@ const HomePage = () => {
     }
 
     const retrieveUsers = async () => {
-        const response = await fetch(`${url}/users`,  {
+        const response = await fetch(`${url}/users`, {
             method: 'GET',
-            headers: {...loginHeaders}
+            headers: { ...loginHeaders }
         });
 
-        if(response.status === 200) {
+        if (response.status === 200) {
             const data = await response.json();
             const users = data['data'];
             updateUsers(users);
@@ -50,23 +50,23 @@ const HomePage = () => {
                 'gene@jimil.com',
                 'gene3@gene.com',
                 'gene4@gene.com'
-                ];
+            ];
             const tempUserDMs = [...userDMs];
 
-            for(let i = 0; i < demoUsers.length; i++) {
+            for (let i = 0; i < demoUsers.length; i++) {
                 const idx = users.findIndex(user => user.email === demoUsers[i]);
 
-                const response = await fetch(`${url}/messages?receiver_id=${users[idx].id}&receiver_class=User`,  {
+                const response = await fetch(`${url}/messages?receiver_id=${users[idx].id}&receiver_class=User`, {
                     method: 'GET',
-                    headers: {...loginHeaders}
+                    headers: { ...loginHeaders }
                 });
 
-                if(response.status === 200) {
+                if (response.status === 200) {
                     const data = await response.json();
                     const messages = data['data'];
                     console.log(messages);
 
-                    if(messages.length > 0 && tempUserDMs.findIndex(user => user.email === demoUsers[i]) === -1) {
+                    if (messages.length > 0 && tempUserDMs.findIndex(user => user.email === demoUsers[i]) === -1) {
                         tempUserDMs.push(users[idx]);
                     }
                 }
@@ -79,10 +79,10 @@ const HomePage = () => {
     const retrieveChannels = async () => {
         const response = await fetch(`${url}/channels`, {
             method: 'GET',
-            headers: {...loginHeaders}
+            headers: { ...loginHeaders }
         });
 
-        if(response.status === 200) {
+        if (response.status === 200) {
             const data = await response.json();
             updateChannels(data['data']);
         }
@@ -92,16 +92,16 @@ const HomePage = () => {
         retrieveChannels();
         retrieveUsers();
 
-        if(!selected && channels.length > 0) {
+        if (!selected && channels.length > 0) {
             updateSelected(channels[0]);
         }
     }, [loginHeaders]);
 
-    return(
+    return (
         <div className="homepage">
             {isAddDMToggled && <AddDirectMessage handleToggle={handleDMToggle} />}
-            <NavBar handleDMToggle={handleDMToggle} retrieveChannels={retrieveChannels}/>
-            <MainChat isAddDMToggled={isAddDMToggled} handleDMToggle={handleDMToggle}/>
+            <NavBar handleDMToggle={handleDMToggle} retrieveChannels={retrieveChannels} />
+            <MainChat isAddDMToggled={isAddDMToggled} handleDMToggle={handleDMToggle} />
         </div>
     )
 }

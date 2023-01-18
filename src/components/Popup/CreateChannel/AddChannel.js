@@ -1,14 +1,11 @@
-import { useNavigate, useState, useContext } from 'react';
-import { LoginHeaders, LoginInfo } from "../../../contexts/LoginContext";
-import { ChannelsContext } from '../../../contexts/ChannelsContext';
-import { UsersContext } from '../../../contexts/UsersContext';
+import { useState, useContext } from 'react';
+import { LoginHeaders } from "../../../contexts/LoginContext";
 import AddMembers from './AddMembers';
 import "./AddChannel.css";
 
-const AddChannel = ({addChannelWindowToggle, retrieveChannels}) => {
-    const url = "http://206.189.91.54/api/v1";
-    const {loginHeaders} = useContext(LoginHeaders);
-    const {updateChannels} = useContext(ChannelsContext);
+const AddChannel = ({ addChannelWindowToggle, retrieveChannels }) => {
+    const url = "//206.189.91.54/api/v1";
+    const { loginHeaders } = useContext(LoginHeaders);
     const [tags, setTags] = useState([]);
     const [indexTags, setIndexTags] = useState([]);
     const [channelInput, setChannelInput] = useState({
@@ -65,7 +62,7 @@ const AddChannel = ({addChannelWindowToggle, retrieveChannels}) => {
                     <div>
                         <div className="channel-name-container">
                             <label>Enter Channel name: </label>
-                            <input type="text" value={channelInput.name} onInput={e => setChannelInput({...channelInput, name: e.target.value})} className="channel-name-input"></input>
+                            <input type="text" value={channelInput.name} onInput={e => setChannelInput({ ...channelInput, name: e.target.value })} className="channel-name-input"></input>
                         </div>
                         <label>Name your buddies...</label>
                         <AddMembers tags={tags} setTags={setTags} indexTags={indexTags} setIndexTags={setIndexTags} />
